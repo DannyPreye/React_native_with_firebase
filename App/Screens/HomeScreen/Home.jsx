@@ -15,6 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../../../firebaseConfig";
 import useFetch from "../../../hooks/useFetch";
 import MovieSlideCard from "../../components/MovieSlideCard";
+import UpComingMovies from "../../components/UpComingMovies";
 
 const Home = () => {
     const { user } = useAuthentication();
@@ -82,6 +83,9 @@ const Home = () => {
                             />
                         )}
                     </View>
+                </View>
+                <View className='my-4 p-4 pb-8 w-full flex-1'>
+                    <UpComingMovies />
                 </View>
             </View>
         </SafeAreaView>
