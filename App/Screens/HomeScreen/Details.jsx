@@ -17,8 +17,6 @@ const Details = ({ navigation, route }) => {
         `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${process.env.API_KEY}`
     );
 
-    console.log(data);
-
     if (loading) {
         return (
             <View>

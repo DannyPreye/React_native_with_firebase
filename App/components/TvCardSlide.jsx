@@ -1,25 +1,32 @@
+import {
+    View,
+    Text,
+    ImageBackground,
+    Touchable,
+    TouchableOpacity,
+} from "react-native";
 import React from "react";
-import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { image_url } from "../../contants/CONSTANTS";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 
-const MovieSlideCard = ({ movie }) => {
+const TvCardSlide = ({ serie }) => {
     const navigation = useNavigation();
-    const handlePress = () => {
-        navigation.navigate("Details", { id: movie?.id });
+
+    const onPress = () => {
+        navigation.navigate(`SeriesDetails`, { id: serie?.id });
     };
 
     return (
         <TouchableOpacity
-            onPress={handlePress}
-            className='w-[256px] h-[256px] rounded-xl overflow-hidden  '
+            onPress={onPress}
+            className='w-[256px] h-[256px] rounded-[12px] overflow-hidden'
         >
             <ImageBackground
                 source={{
-                    uri: movie?.backdrop_path
-                        ? `${image_url}${movie?.backdrop_path}`
-                        : `${image_url}${movie?.poster_path}`,
+                    uri: serie?.backdrop_path
+                        ? `${image_url}${serie?.backdrop_path}`
+                        : `${image_url}${serie?.poster_path}`,
                 }}
                 className='flex-1'
             >
@@ -34,11 +41,14 @@ const MovieSlideCard = ({ movie }) => {
                 >
                     <View className='flex-1 p-3  justify-end'>
                         <View className='flex-row gap-3'>
-                            <Text className='font-bold text-gray-200'>
+                            <Text
+                                ellipsizeMode='clip'
+                                className='font-bold text-gray-200'
+                            >
                                 Title:
                             </Text>
                             <Text className='font-bold text-gray-200'>
-                                {movie?.title}
+                                {serie?.original_name || serie?.name}
                             </Text>
                         </View>
                         <View className='flex-row gap-3'>
@@ -46,7 +56,7 @@ const MovieSlideCard = ({ movie }) => {
                                 Language:
                             </Text>
                             <Text className='font-bold text-gray-200'>
-                                {movie?.original_language}
+                                {serie?.original_language}
                             </Text>
                         </View>
 
@@ -55,10 +65,10 @@ const MovieSlideCard = ({ movie }) => {
                                 Release Date:
                             </Text>
                             <Text className='font-bold text-gray-200'>
-                                {movie?.release_date
-                                    .split("-")
-                                    .reverse()
-                                    .join("/")}
+                                {serie?.first_air_date
+                                    ?.split("-")
+                                    ?.reverse()
+                                    ?.join("/")}
                             </Text>
                         </View>
                     </View>
@@ -68,4 +78,4 @@ const MovieSlideCard = ({ movie }) => {
     );
 };
 
-export default MovieSlideCard;
+export default TvCardSlide;

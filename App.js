@@ -13,14 +13,13 @@ import Login from "./App/Screens/authScreens/Login";
 import Register from "./App/Screens/authScreens/Register";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Details from "./App/Screens/HomeScreen/Details";
+import TvDetail from "./App/Screens/HomeScreen/TvDetail";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     const auth = getAuth(app);
     const [initializing, setInitializing] = React.useState(true);
     const [user, setUser] = React.useState(null);
-
-    console.log(user);
 
     const onAuthChangeHandler = (user) => {
         setUser(user);
@@ -32,8 +31,6 @@ export default function App() {
     React.useEffect(() => {
         auth.onAuthStateChanged(onAuthChangeHandler);
     }, []);
-
-    console.log(initializing);
 
     if (initializing) {
         return (
@@ -50,6 +47,10 @@ export default function App() {
                     <>
                         <Stack.Screen name='Home' component={Home} />
                         <Stack.Screen name='Details' component={Details} />
+                        <Stack.Screen
+                            name='SeriesDetails'
+                            component={TvDetail}
+                        />
                     </>
                 ) : (
                     <>
